@@ -3,9 +3,7 @@ declare(strict_types=1);
 
 namespace IntegerNet\DeployerTimer;
 
-use Deployer\Deployer;
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\Process\Process;
 
 class RecipeTest extends TestCase
 {
@@ -31,7 +29,7 @@ class RecipeTest extends TestCase
         }
     }
 
-    public function testTimer()
+    public function testTimerWithCsvResult()
     {
         $recipeFile = __DIR__ . '/../recipe/timer.php';
         $csvFile = $this->createTmpFile();
@@ -45,7 +43,7 @@ require '{$recipeFile}';
 
 task('test', function() { writeln('Test Output');});
 
-timerCsv('{$csvFile}');
+after('test', timer()->createCsvResultTask('{$csvFile}'));
 PHP
         );
         exec('vendor/bin/dep --file=' . $this->deployFile . ' test', $output);
