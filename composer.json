@@ -34,7 +34,10 @@
   "autoload-dev": {
     "psr-4":  {
       "IntegerNet\\DeployerTimer\\": "tests/"
-    }
+    },
+    "files": [
+      "recipe/timer.php"
+    ]
   },
   "scripts": {
     "test": "phpunit && infection && phpstan analyze --level 7 src tests && phan"

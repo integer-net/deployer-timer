@@ -17,6 +17,9 @@ use function Deployer\invoke;
 use function Deployer\task;
 use function Deployer\writeln;
 
+/**
+ * @SuppressWarnings(PHPMD.StaticAccess)
+ */
 class TaskDecoratorTest extends TestCase
 {
     /**

@@ -11,9 +11,9 @@ class FakeClockTest extends TestCase
     {
         $clock = new FakeClock((float) strtotime('2000-01-01'));
         $this->assertEqualsWithDelta(946684800, $clock->microtime(), 0.001);
-        $clock->advanceMs(500);
+        $clock->advanceMillis(500);
         $this->assertEqualsWithDelta(946684800.5, $clock->microtime(), 0.001);
-        $clock->advanceMs(50);
+        $clock->advanceMillis(50);
         $this->assertEqualsWithDelta(946684800.55, $clock->microtime(), 0.001);
     }
 }

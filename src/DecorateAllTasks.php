@@ -23,8 +23,14 @@ class DecorateAllTasks
         foreach ($this->deployer->tasks as $taskName => $task) {
             $beforeName = $taskName . '.' . $decorator->name() . '.before';
             $afterName = $taskName . '.' . $decorator->name() . '.after';
-            $this->deployer->tasks->set($beforeName, (new Task($beforeName, $decorator->callbackBefore($taskName)))->shallow());
-            $this->deployer->tasks->set($afterName, (new Task($afterName, $decorator->callbackAfter($taskName)))->shallow());
+            $this->deployer->tasks->set(
+                $beforeName,
+                (new Task($beforeName, $decorator->callbackBefore($taskName)))->shallow()
+            );
+            $this->deployer->tasks->set(
+                $afterName,
+                (new Task($afterName, $decorator->callbackAfter($taskName)))->shallow()
+            );
             if (!in_array($task->getName(), [$beforeName, $afterName], true)) {
                 $task->addBefore($beforeName);
                 $task->addAfter($afterName);

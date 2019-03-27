@@ -16,7 +16,7 @@ class TimerTaskDecoratorTest extends TestCase
         $timer->callbackAfter('inner')();
         $timer->callbackAfter('outer')();
         $this->assertEquals(
-<<<CSV
+            <<<CSV
 BEGIN,outer,0,0
 BEGIN,inner,0,0
 END,inner,0,0
@@ -31,11 +31,11 @@ CSV
         $clock = new FakeClock(1000000000);
         $timer = new TimerTaskDecorator($clock);
         $timer->callbackBefore('outer')();
-        $clock->advanceMs(1);
+        $clock->advanceMillis(1);
         $timer->callbackBefore('inner')();
-        $clock->advanceMs(2);
+        $clock->advanceMillis(2);
         $timer->callbackAfter('inner')();
-        $clock->advanceMs(4);
+        $clock->advanceMillis(4);
         $timer->callbackAfter('outer')();
         $this->assertEquals(
             <<<CSV

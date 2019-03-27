@@ -33,7 +33,7 @@ class TimerTaskDecorator implements TaskDecorator
 
     public function callbackBefore(string $taskName): callable
     {
-        return function() use ($taskName) {
+        return function () use ($taskName) {
             \array_push($this->startTimeStack, $this->clock->microtime());
             $this->events->append(new TimerEvent(TimerEvent::TYPE_BEGIN, $taskName, $this->clock->microtime(), 0));
         };
@@ -41,10 +41,12 @@ class TimerTaskDecorator implements TaskDecorator
 
     public function callbackAfter(string $taskName): callable
     {
-        return function() use ($taskName) {
+        return function () use ($taskName) {
             $startTime = \array_pop($this->startTimeStack);
             $duration = $this->clock->microtime() - $startTime;
-            $this->events->append(new TimerEvent(TimerEvent::TYPE_END, $taskName, $this->clock->microtime(), $duration));
+            $this->events->append(
+                new TimerEvent(TimerEvent::TYPE_END, $taskName, $this->clock->microtime(), $duration)
+            );
         };
     }
 

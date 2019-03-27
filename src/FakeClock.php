@@ -20,9 +20,8 @@ class FakeClock implements Clock
         return $this->timestamp;
     }
 
-    public function advanceMs(int $ms): void
+    public function advanceMillis(int $millis): void
     {
-        $this->timestamp += ($ms * 0.001);
+        $this->timestamp += ($millis * 0.001);
     }
-
 }
