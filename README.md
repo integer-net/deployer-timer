@@ -45,6 +45,16 @@ In your `deploy.php` file:
     
     `timer()` must be called after all other tasks are defined. The generated task to create a CSV result file should be added at the end of the task/group that should be timed (e.g. `deploy`)
 
+## Troubleshooting
+
+If you receive errors about missing classes, include the standalone autoloader:
+
+```
+require __DIR__ . '/vendor/integer-net/deployer-timer/autoload.php';
+```
+
+This way, you can use the recipe without relying on the composer autoloader (e.g. when running deployer as phar)
+
 ## Change log
 
 Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
