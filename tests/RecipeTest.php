@@ -52,19 +52,22 @@ PHP
             $output,
             'Test task should be executed.' . "\n" .
             'Expected "Test Output"' . "\n" .
-            'Actual Output: ' . print_r($output,true)
+            'Actual Output: ' . print_r($output, true)
         );
         $this->assertRegExp(<<<'REGEX'
 {BEGIN,test,[\d.]+,[\d.]+
 END,test,[\d.]+,[\d.]+}
 REGEX
 
-            , file_get_contents($csvFile), 'CSV file should be written with timer results');
+            , (string)file_get_contents($csvFile), 'CSV file should be written with timer results');
     }
 
     private function createTmpFile()
     {
         $fileName = tempnam(sys_get_temp_dir(), 'integer-net-deployer-timer');
+        if (!$fileName) {
+            throw new \RuntimeException('Could not create temporary file');
+        }
         $this->tmpFiles[] = $fileName;
         return $fileName;
     }

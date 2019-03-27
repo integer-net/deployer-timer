@@ -39,13 +39,22 @@ class TimerEvent
 
     public function asCsvLine(): string
     {
-        $f = fopen('php://memory', 'rb+');
-        if (fputcsv($f, $this->asArray()) === false) {
-            throw new \RuntimeException('Cannot format TimerEvent as CSV');
+        $csvStream = fopen('php://memory', 'rb+');
+        if ($csvStream === false) {
+            throw new \RuntimeException('Could not open temporary stream');
         }
-        rewind($f);
-        $line = stream_get_contents($f);
-        fclose($f);
+        try {
+            if (fputcsv($csvStream, $this->asArray()) === false) {
+                throw new \RuntimeException('Could not format TimerEvent as CSV');
+            }
+            rewind($csvStream);
+            $line = stream_get_contents($csvStream);
+            if ($line === false) {
+                throw new \RuntimeException('Could not read from temporary CSV stream');
+            }
+        } finally {
+            fclose($csvStream);
+        }
         return rtrim($line);
     }
 }
