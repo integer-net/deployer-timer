@@ -13,7 +13,7 @@ class SystemClockTest extends TestCase
         $this->assertEqualsWithDelta(
             microtime(true),
             $clock->microtime(),
-            0.000010,
+            0.0005, // test only for ms accuracy
             'System clock should return current time in µs'
         );
     }

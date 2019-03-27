@@ -1,4 +1,6 @@
 /composer.lock
 /vendor
+/build
+/tests/infection-log.txt
 .phpunit.result.cache
 .idea
