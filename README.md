@@ -22,6 +22,12 @@ END,release,1553682979.3,0.8
 END,deploy,1553682979.3,4.9
 ```
 
+The columns are:
+- `BEGIN` or `END`, marking time where a task started or finished
+- task name
+- Unix timestamp (as float)
+- Duration of task in seconds (only in `END` rows)
+
 ## Installation
 
 1. Require via composer
