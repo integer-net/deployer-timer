@@ -10,7 +10,7 @@
     }
   ],
   "require": {
-    "php": "^7.1.0|^7.2.0|^7.3.0",
+    "php": "^7.1.0|^7.2.0|^7.3.0|^8.0.0|^8.1.0",
     "roave/security-advisories": "dev-master",
     "deployer/deployer": "^6.4"
   },
@@ -41,5 +41,11 @@
   },
   "scripts": {
     "test": "phpunit && infection && phpstan analyze --level 7 src tests && phan"
+  },
+  "config": {
+    "allow-plugins": {
+      "ocramius/package-versions": true,
+      "phpro/grumphp": true
+    }
   }
 }
